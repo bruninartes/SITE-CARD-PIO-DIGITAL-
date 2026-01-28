@@ -360,7 +360,11 @@ e envie direto pelo WhatsApp
 <input id="bairro" placeholder="Bairro">
 <input id="comp" placeholder="Complemento">
 <textarea id="obs" placeholder="Observações do pedido (ex: X-Burger sem cebola, batata bem passada)"></textarea>
-
+<select id="tipo-entrega">
+  <option value="Entrega">🛵 Entrega</option>
+  <option value="Retirada">🏪 Retirada no local</option>
+</select>
+  
 <select id="pagamento">
 <option>Dinheiro</option>
 <option>Pix</option>
@@ -453,6 +457,7 @@ function enviar(){
   let msg = `🍔 *NOVO PEDIDO*\n\n`;
   msg += `👤 Nome: ${nome.value}\n`;
   msg += `📍 Endereço: ${rua.value}, ${numero.value} - ${bairro.value}\n`;
+  msg += `🚚 Tipo: ${document.getElementById("tipo-entrega").value}\n`;
   msg += `📦 Complemento: ${comp.value || "Não informado"}\n`;
   msg += `💳 Pagamento: ${pagamento.value}\n`;
   msg += `📝 Observações: ${obs.value || "Nenhuma"}\n\n`;
