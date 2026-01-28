@@ -144,6 +144,30 @@ input, select, textarea {
   border: none;
   border-radius: 6px;
 }
+  .carrinho-flutuante {
+  position: fixed;        /* Fica preso na tela */
+  bottom: 20px;           /* Distância do fundo */
+  right: 20px;            /* Distância da direita */
+  background: #d32f2f;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 50px;    /* Formato arredondado */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 9999;          /* Fica acima de tudo */
+}
+
+.carrinho-flutuante span {
+  background: white;
+  color: #d32f2f;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 14px;
+}
 </style>
 </head>
 
@@ -375,6 +399,7 @@ lista.innerHTML+=`
 </li>`;
 }
 document.getElementById("total").innerText=total;
+  atualizarCarrinhoFlutuante();
 }
 
 function alterarQtd(nome,delta){
@@ -421,7 +446,31 @@ function enviar(){
     "_blank"
   );
 }
+  function atualizarCarrinhoFlutuante() {
+  let itens = 0;
+  let valor = 0;
+
+  for (let i in carrinho) {
+    itens += carrinho[i].qtd;
+    valor += carrinho[i].qtd * carrinho[i].preco;
+  }
+
+  document.getElementById("itens-carrinho").innerText = itens;
+  document.getElementById("total-carrinho").innerText = valor;
+}
+
+function abrirCarrinho() {
+  document.querySelector(".carrinho")
+    .scrollIntoView({ behavior: "smooth" });
+}
 </script>
 
+<!-- CARRINHO FLUTUANTE -->
+<div class="carrinho-flutuante" onclick="abrirCarrinho()">
+  🛒 Carrinho
+  <span id="itens-carrinho">0</span>
+  R$ <span id="total-carrinho">0</span>
+</div>
+  
 </body>
 </html>
