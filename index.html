@@ -168,10 +168,33 @@ input, select, textarea {
   border-radius: 20px;
   font-size: 14px;
 }
+  .status-loja{
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.status-loja.aberto{
+  background: #2ecc71;
+  color: #000;
+}
+
+.status-loja.fechado{
+  background: #e74c3c;
+  color: #fff;
+}
 </style>
 </head>
 
 <body>
+  <!-- STATUS DA LOJA -->
+<div id="status-loja" class="status-loja aberto">
+  🟢 ABERTO – Aceitando pedidos
+</div>
 
 <header>
 <h1>HAMBURGUERIA ORIGINAL BURGUER</h1>
@@ -463,6 +486,26 @@ function abrirCarrinho() {
   document.querySelector(".carrinho")
     .scrollIntoView({ behavior: "smooth" });
 }
+  const horarioAbertura = 18; // 18h
+const horarioFechamento = 23; // 23h
+
+function verificarStatusLoja(){
+  const agora = new Date().getHours();
+  const status = document.getElementById("status-loja");
+  const botaoWhats = document.getElementById("btn-finalizar"); // botão do pedido
+
+  if(agora >= horarioAbertura && agora < horarioFechamento){
+    status.className = "status-loja aberto";
+    status.innerText = "🟢 ABERTO – Aceitando pedidos";
+    if(botaoWhats) botaoWhats.disabled = false;
+  }else{
+    status.className = "status-loja fechado";
+    status.innerText = "🔴 FECHADO – Volte às 18h";
+    if(botaoWhats) botaoWhats.disabled = true;
+  }
+}
+
+verificarStatusLoja();
 </script>
 
 <!-- CARRINHO FLUTUANTE -->
