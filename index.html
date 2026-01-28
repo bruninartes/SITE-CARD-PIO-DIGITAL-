@@ -187,6 +187,21 @@ input, select, textarea {
   background: #e74c3c;
   color: #fff;
 }
+  .produto{
+  position: relative;
+}
+
+.badge{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4757;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
 </style>
 </head>
 
@@ -231,7 +246,12 @@ e envie direto pelo WhatsApp
 <button class="add" onclick="addComQtd('X-Burger',21)">Adicionar</button>
 </div>
 </div>
-
+<div class="produto destaque">
+  <span class="badge">🔥 Mais vendido</span>
+  <h3>X-Burger</h3>
+  <p>Pão, carne, queijo e molho da casa</p>
+</div>
+  
 <div class="produto">
 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
 <div class="info">
