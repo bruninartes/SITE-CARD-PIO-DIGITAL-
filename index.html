@@ -384,15 +384,42 @@ render();
 }
 
 function enviar(){
-let msg=`🍔 *NOVO PEDIDO - HAMBURGUERIA ORIGINAL BURGUER*\n\n`;
-msg+=`👤 Nome: ${nome.value}\n`;
-msg+=`📍 Endereço: ${rua.value}, ${numero.value} - ${bairro.value}\n`;
-msg+=`📦 Complemento: ${comp.value}\n`;
-msg+=`💳 Pagamento: ${pagamento.value}\n`;
-msg+=`📝 Observações: ${obs.value||"Nenhuma"}\n\n🛒 *Pedido:*\n`;
-for(let i in carrinho){msg+=`• ${i} (${carrinho[i].qtd}x)\n`;}
-msg+=`\n💰 *Total: R$ ${total}*`;
-window.open("https://wa.me/5534999060948?text="+encodeURIComponent(msg));
+
+  // 🔒 VALIDAÇÕES
+  if(Object.keys(carrinho).length === 0){
+    alert("⚠️ Seu carrinho está vazio. Adicione pelo menos um item.");
+    return;
+  }
+
+  if(!nome.value.trim()){
+    alert("⚠️ Informe seu nome.");
+    return;
+  }
+
+  if(!rua.value.trim() || !numero.value.trim()){
+    alert("⚠️ Preencha rua e número.");
+    return;
+  }
+
+  // 📩 MENSAGEM WHATSAPP
+  let msg = `🍔 *NOVO PEDIDO*\n\n`;
+  msg += `👤 Nome: ${nome.value}\n`;
+  msg += `📍 Endereço: ${rua.value}, ${numero.value} - ${bairro.value}\n`;
+  msg += `📦 Complemento: ${comp.value || "Não informado"}\n`;
+  msg += `💳 Pagamento: ${pagamento.value}\n`;
+  msg += `📝 Observações: ${obs.value || "Nenhuma"}\n\n`;
+  msg += `🛒 *Pedido:*\n`;
+
+  for(let item in carrinho){
+    msg += `• ${item} (${carrinho[item].qtd}x)\n`;
+  }
+
+  msg += `\n💰 *Total: R$ ${total}*`;
+
+  window.open(
+    "https://wa.me/5534999060948?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 }
 </script>
 
